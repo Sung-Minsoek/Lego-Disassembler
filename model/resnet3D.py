@@ -1,5 +1,6 @@
 import torch
 from torch import nn
+from functools import partial
 import torch.nn.functional as F
 
 

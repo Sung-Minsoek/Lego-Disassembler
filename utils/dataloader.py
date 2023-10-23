@@ -6,15 +6,8 @@ import torch
 import torchvision
 from torchvision.transforms import v2
 from torch.utils.data import DataLoader, Dataset, random_split
+from sklearn.model_selection import train_test_split
 
-import params as p
-
-params = p.params
-
-data_GPT_path = 'data/data_GPT/data_GPT.npy'
-labels_GPT_path = 'data/data_GPT/labels_GPT.csv'
-data_Reg_path = 'data/data_Reg/data_Reg.npy'
-labels_Reg_path = 'data/data_Reg/labels_Reg.csv'
 
 class CustomDataset(Dataset):
     def __init__(self, data, labels, transform=None, no_labels=False):
@@ -27,7 +20,7 @@ class CustomDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx):
-        if self.no_labels == True:
+        if self.no_labels:
             image = self.data[idx]
             if self.transform:
                 image = self.transform(image)
@@ -39,6 +32,7 @@ class CustomDataset(Dataset):
             if self.transform:
                 image = self.transform(image)
             return image, label
+
 
 def data_and_labels_to_tensor(data_path, labels_path):
     data_np = np.load(data_path)
@@ -54,14 +48,15 @@ def data_and_labels_to_tensor(data_path, labels_path):
     index_list = []
 
     for row in labels_tensor:
-        indice = torch.nonzero(row).squeeze().tolist()
+        indices = torch.nonzero(row).squeeze().tolist()
         index_list.append(indices)
 
     labels_tensor = torch.tensor(index_list)
     
     return data_tensor, labels_tensor
 
-def make_dataloader(data, labels, random_seed=0):
+
+def make_dataloader(data, labels, params, random_seed=0):
     train_data, valid_data, train_labels, valid_labels = train_test_split(data, labels, test_size=params['valid_size'], random_state=random_seed)
 
     train_transforms = v2.Compose([

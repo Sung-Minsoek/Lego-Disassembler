@@ -2,14 +2,15 @@ import time
 import torch
 import torch.nn as nn
 
-import test
+import test_GPT as test
 
 # for early stopping and save model.
-save_path = './'
+save_path = '../'
 
 # for visualize.
 train_accs = []
 valid_accs = []
+
 
 def train(model, trainloader, validloader, params, early_stopping=False):
     best_valid_acc = 0
@@ -49,7 +50,7 @@ def train(model, trainloader, validloader, params, early_stopping=False):
             train_total += labels.size(0)
             train_correct += (predicted == labels).sum().item()
 
-            #Time
+            # Time
             end_time = time.time()
             time_taken = end_time - start_time
             time_taken = str(time_taken/60).split('.')

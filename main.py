@@ -1,6 +1,7 @@
 import torch
 
-from utils import dataloader, params, visualize
+from utils import dataloader, visualize
+from utils import params as p
 from train import train_GPT, train_Reg
 from model import resnet3D
 
@@ -9,12 +10,9 @@ labels_GPT_path = 'data/data_GPT/labels_GPT.csv'
 data_Reg_path = 'data/data_Reg/data_Reg.npy'
 labels_Reg_path = 'data/data_Reg/labels_Reg.csv'
 
-params = params.params
+params = p.params
 
 if __name__ == '__main__':
-    # Initialization parameters
-    params.init_params(params)
-
     # Load data
     data_GPT, labels_GPT = dataloader.data_and_labels_to_tensor(data_GPT_path, labels_GPT_path)
     data_Reg, labels_Reg = dataloader.data_and_labels_to_tensor(data_Reg_path, labels_Reg_path)
@@ -30,6 +28,9 @@ if __name__ == '__main__':
     # Use ResNet-3D-50 network
     model_Lego_GPT = resnet3D.generate_model(50)
 
+    # Initialization loss function, scheduler, optimizer
+    p.init_train_setting(params, model_Lego_GPT, trainloader_GPT)
+
     # Train Lego-GPT
     model_Lego_GPT = train_GPT.train(model_Lego_GPT, trainloader_GPT, validloader_GPT, params, early_stopping=True)
 
@@ -40,6 +41,9 @@ if __name__ == '__main__':
     # Generate model for Regression
     # Use ResNet-3D-50 network
     model_Reg = resnet3D.generate_model(50)
+
+    # Initialization loss function, scheduler, optimizer
+    p.init_train_setting(params, model_Reg, trainloader_Reg)
 
     # Load trained Lego-GPT network to Regression model
     checkpoint = torch.load(train_GPT.save_path)

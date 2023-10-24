@@ -21,7 +21,8 @@ params = {
     'device'        : 'cuda'    # 'cuda' = use cuda
 }
 
-def init_params(params):
+
+def init_train_setting(params, model, trainloader):
     params['loss_function'] = nn.CrossEntropyLoss(label_smoothing=0.1)
     params['optimizer'] = optim.AdamW(params=model.parameters(), lr = params['lr'], weight_decay=params['wd_decay'])
     params['scheduler'] = optim.lr_scheduler.OneCycleLR(params['optimizer'], params['lr'], total_steps=params['epochs'] * len(trainloader))

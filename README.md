@@ -47,7 +47,7 @@ We have two types of dataset. One is for Lego-GPT. The other is for Regression p
 - Label means dettached brick type(1: 2x4, 2: 2x3, 3: 2x2, 4: 1x2, 5: 1x1, 6: 1x4, 7: 1x3).
 
 <img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/320c79a6-b21f-4af9-945a-591510a99281" width="300" height="140">
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/fed74b7c-2076-41c7-afb0-639e6d5c91df" width="300" height="140">
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/fed74b7c-2076-41c7-afb0-639e6d5c91df" width="300" height="140"><br/>
 <img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/3ca68f20-3dd6-45b5-9600-aa2b1fc695a1" width="300" height="140">
 <img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/af292569-8364-4e5e-b287-8fe38fa1e80c" width="300" height="140">
 

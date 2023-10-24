@@ -5,7 +5,7 @@ import torch.nn as nn
 import test_GPT as test
 
 # for early stopping and save model.
-save_path = '../'
+save_path = './best_model_GPT.pth'
 
 # for visualize.
 train_accs = []
@@ -57,7 +57,7 @@ def train(model, trainloader, validloader, params, early_stopping=False):
 
         valid_acc = test.test_with_labels_for_classification(model, validloader)
 
-        if valid_acc > best_valid_acc and early_stopping == True:
+        if valid_acc > best_valid_acc and early_stopping:
             best_valid_acc = valid_acc
 
             checkpoint = {

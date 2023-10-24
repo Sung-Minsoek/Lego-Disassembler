@@ -1,5 +1,7 @@
+import torch
+
 from utils import dataloader, params, visualize
-from train import train_GPT
+from train import train_GPT, train_Reg
 from model import resnet3D
 
 data_GPT_path = 'data/data_GPT/data_GPT.npy'
@@ -26,11 +28,25 @@ if __name__ == '__main__':
 
     # Generate model for Lego-GPT
     # Use ResNet-3D-50 network
-    model = resnet3D.generate_model(50)
+    model_Lego_GPT = resnet3D.generate_model(50)
 
     # Train Lego-GPT
-    model = train_GPT.train(model, trainloader_GPT, validloader_GPT, params, early_stopping=True)
+    model_Lego_GPT = train_GPT.train(model_Lego_GPT, trainloader_GPT, validloader_GPT, params, early_stopping=True)
 
-    # Show result
+    # Show result of Lego-GPT
     visualize.show_result(train_GPT.train_accs, train_GPT.valid_accs)
-    visualize.show_prediction(model, validloader_GPT, params)
+    visualize.show_prediction(model_Lego_GPT, validloader_GPT, params)
+
+    # Generate model for Regression
+    # Use ResNet-3D-50 network
+    model_Reg = resnet3D.generate_model(50)
+
+    # Load trained Lego-GPT network to Regression model
+    checkpoint = torch.load(train_GPT.save_path)
+    model_Reg.load_state_dict(checkpoint['model_state_dict'])
+
+    # Start fine-tuning total network to Regression problem
+    model_Reg = train_Reg.train(model_Reg, trainloader_Reg, validloader_Reg, params, early_stopping=True)
+
+    # Show result of Regression
+    visualize.show_result(train_Reg.train_losses, train_Reg.valid_losses)

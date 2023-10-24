@@ -1,4 +1,19 @@
-def train(model, trainloader, validloader, params):
+import time
+import torch
+import torch.nn as nn
+
+import test_Reg as test
+
+# for early stopping and save model.
+save_path = './best_model_Reg.pth'
+
+# for visualize.
+train_losses = []
+valid_losses = []
+
+
+def train(model, trainloader, validloader, params, early_stopping=False):
+    best_valid_loss = float("inf")
 
     device = params['device']
 
@@ -36,6 +51,20 @@ def train(model, trainloader, validloader, params):
             time_taken = end_time - start_time
             time_taken = str(time_taken/60).split('.')
 
-        valid_loss = test_for_regression(model, validloader)
+        valid_loss = test.test_for_regression(model, validloader)
 
-        print('Epoch: {}/{}, train_loss: {:.4f}, valid_loss: {:.2f}, time:{}m {}s'.format(epoch + 1, params['epochs'], running_loss / num_samples, valid_loss, time_taken[0], time_taken[1][:2]))
+        if valid_loss < best_valid_loss and early_stopping:
+            best_valid_loss = valid_loss
+
+            checkpoint = {
+                'model_state_dict': model.state_dict(),
+                'optimizer_state_dict': params['optimizer'].state_dict(),
+                'scheduler_state_dict': params['scheduler'].state_dict(),
+            }
+
+            torch.save(checkpoint, save_path)
+
+        train_losses.append(running_loss / num_samples)
+        valid_losses.append(valid_loss)
+
+        print('Epoch: {}/{}, train_loss: {:.4f}, valid_loss: {:.4f}, time:{}m {}s'.format(epoch + 1, params['epochs'], running_loss / num_samples, valid_loss, time_taken[0], time_taken[1][:2]))

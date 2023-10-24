@@ -33,7 +33,7 @@ The goal of this project is the deep-learning model captures the number of Lego 
 - Data is a tensor-4D(2, C, H, W).
 
 ## Dataset
-We have two types of dataset. One is for Lego-GPT. The other is for Regression problem. Each structure has 5~10 bricks in Regression dataset, 5~6 bricks in Lego-GPT dataset.
+We have two types of dataset. One is for Lego-GPT. The other is for Regression problem. Each structure has 5-10 bricks in Regression dataset, 5-6 bricks in Lego-GPT dataset.
 
 ### 1. Regression Dataset
 - Use 4-views of an Lego structure images as input, the model show the number of each type of brick.

@@ -40,18 +40,18 @@ We have two types of dataset. One is for Lego-GPT. The other is for Regression p
 - Label means the number of bricks(1: 2x4, 2: 2x3, 3: 2x2, 4: 1x2, 5: 1x1, 6: 1x4, 7: 1x3).
 - Dataset size: (B, 4, 1, 256, 256)
 
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/8295efbf-b87d-40e7-92e2-8f1e8d67bd49" width="600" height="140">
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/80b9e77f-4f81-41af-a9e7-b546d76aed08" width="600" height="140">
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/b8616f7f-f223-4af2-bdfb-73c1e9f3851f" width="600" height="140">
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/9a1cb747-ea81-4391-abe3-6811a9c0457f" width="600" height="140">
 
 ### 2. Lego-GPT Dataset
 - Input is 2 images. First is origin, second is one brick dettached from origin.
 - Label means dettached brick type(1: 2x4, 2: 2x3, 3: 2x2, 4: 1x2, 5: 1x1, 6: 1x4, 7: 1x3).
 - - Dataset size: (B, 2, 1, 256, 256)
 
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/320c79a6-b21f-4af9-945a-591510a99281" width="300" height="140">
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/fed74b7c-2076-41c7-afb0-639e6d5c91df" width="300" height="140"><br/>
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/3ca68f20-3dd6-45b5-9600-aa2b1fc695a1" width="300" height="140">
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/af292569-8364-4e5e-b287-8fe38fa1e80c" width="300" height="140">
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/90a5ae6a-427c-433d-bade-ac4a1b36225a" width="300" height="140">
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/895348b9-d089-4a2d-8ef9-564ce021d584" width="300" height="140"><br/>
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/29e20fab-9e8e-4d06-b4de-f5964f056297" width="300" height="140">
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/eb5dd9fa-371d-4525-baab-ecb3574831cf" width="300" height="140">
 
 ## Model
 We use [ResNet-3D](https://arxiv.org/abs/2004.04968) for pytorch. [Here](https://github.com/kenshohara/3D-ResNets-PyTorch) is git repo.
@@ -94,10 +94,10 @@ Show result of each problem.
 ### 1. Lego-GPT
 Top Accuracy: 82.20%
 
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/040eae00-3387-4ecb-bea1-7b0e92ef046e" width="500" height="450">
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/58746b9c-d669-40c3-97a9-492373c5b152" width="500" height="450">
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/56e0f1e2-e1a4-4a16-87a9-0d9dbd31ddac" width="500" height="450">
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/3f1b406f-6c48-420f-bbb4-895ddc420084" width="500" height="450">
 
 ### 2. Regression
 Minimum Loss: 0.5127
 
-<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/f7acbac2-079b-4f31-820c-6851ae6b99fd" width="600" height="450">
+<img src="https://github.com/Sung-Minsoek/Lego-Disassembler/assets/127949889/e3653302-e21c-407e-8bf7-af359db0dabd" width="600" height="450">
